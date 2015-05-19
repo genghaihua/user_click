@@ -1,0 +1,83 @@
+======================user list=========================================
+ var items=document.getElementsByClassName('WB_info');
+ for(var j=0;j<items.length;j++) {
+  var suba=items[j].getElementsByTagName("a");
+  var suba_href=suba[0].getAttribute("href");
+  var suba_nick=suba[0].getAttribute("nick-name");
+  var suba_card=suba[0].getAttribute("usercard");
+  console.log(suba_card+"\t"+suba_nick+"\t"+suba_href);
+ }
+ 
+  var items=document.getElementsByClassName('WB_info');
+ console.log(items.length);
+ for(var j=0;j<items.length;j++) {
+  console.log(items[j]);
+ }
+ 
+ =====================user info===========================================
+ 
+ //title 
+ var info="";
+  
+ var title=document.title;
+ info=info+"title:"+title+"\t";
+ var metas=document.head.getElementsByTagName("meta");
+ for(var j=0;j<metas.length;j++)
+ {
+  var name=metas[j].getAttribute("name");
+  if(name=='keywords')
+  {
+     var keywords=metas[j].getAttribute("content");
+	 info=info+"keywords:"+keywords+"\t";
+  }
+    if(name=='description')
+  { 
+    var description=metas[j].getAttribute("content");
+	 info=info+"description:"+description+"\t";
+  }
+ }
+ 
+ 
+ //简介  标签
+ var items=document.getElementsByClassName('item_text W_fl');
+ 
+  for(var j=0;j<items.length;j++) {//(2/3,无标签)
+    if(items[j].innerHTML.indexOf("简介")>=0)
+	{
+	// info=info+items[j].innerText.replace(/(^\s*)|(\s*$)|(\n)/g, "")+"\t";
+	  info=info+items[j].innerText+"\t";
+     //console.log(items[j].innerText);
+    }
+	
+	if(items[j].innerHTML.indexOf("标签")>=0)
+	{
+	  info=info+"标签:\t";
+	  var suba=items[j].getElementsByTagName("a");
+	  for(var k=0;k<suba.length;k++)
+	  {
+	     info=info+suba[k].innerText+"\t";
+	     //console.log(suba[k].innerText);
+	  }
+     // console.log(items[j]);
+    }
+ }
+ //console.log(info);
+ 
+
+ //帖子
+ var items=document.getElementsByClassName('WB_detail');
+ info=info+"帖子:\t";
+ for(var j=0;j<items.length;j++) {
+   var subitem=items[j].getElementsByClassName('WB_text W_f14');
+   if(subitem.length>0)
+   {
+     var t=subitem[0].innerText;
+     if (t !== null || t !== undefined || t !== '') { 
+        info=info+t+"\t"; 
+     } 
+    // console.log(subitem[0].innerText);
+   }
+ }
+ 
+ console.log(info);
+ 
